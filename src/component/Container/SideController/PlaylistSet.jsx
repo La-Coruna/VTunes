@@ -2,7 +2,9 @@ import React,{useState} from "react";
 import styles from "../../../styles/PlaylistSet.module.css";
 import ScrollList from "../../common/ScrollList/ScrollList";
 import PlaylistItem from "./PlaylistItem";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createPlaylist } from "../../../modules/rootReducer";
+
 
 const PlaylistSet = ({onSelectedPlaylist}) => {
   const [isDeleteClick, setIsDeleteClick] = useState(false);
@@ -35,6 +37,7 @@ const PlaylistSet = ({onSelectedPlaylist}) => {
     width: "35%",
   };
 //TODO
+  const dispatch = useDispatch();
   const playlistArray = useSelector((state) => {
     return state.playlists.playlistArray;
   });
@@ -56,7 +59,11 @@ const PlaylistSet = ({onSelectedPlaylist}) => {
             />
           </div>
           <div className={styles["adder-modal-button-area"]}>
-            <button className={styles["confirm-button"]}>Confirm</button>
+            <button className={styles["confirm-button"]}
+              onClick={() => {
+                dispatch(createPlaylist({userInput})); //TODO pl 새로만드는 기능
+              }}
+            >Confirm</button>
             <button className={styles["cancel-button"]}>Cancel</button>
           </div>
         </div>
