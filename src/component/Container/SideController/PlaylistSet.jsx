@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import styles from "../../../styles/PlaylistSet.module.css";
 import ScrollList from "../../common/ScrollList/ScrollList";
 import PlaylistItem from "./PlaylistItem";
+import { useSelector } from 'react-redux';
 
 const PlaylistSet = ({onSelectedPlaylist}) => {
   const [isDeleteClick, setIsDeleteClick] = useState(false);
@@ -33,72 +34,11 @@ const PlaylistSet = ({onSelectedPlaylist}) => {
     height: "70%",
     width: "35%",
   };
-
-  const playlistSet = {//임시 테스트용 나중엔 고쳐야됨
-    playlists: [
-      {
-        pid: 0,
-        numberOfMusic: 2,
-        playlistName: "음잘알김영현의플레이리스트",
-        musics: 
-        [
-          {
-            musicId: 1,
-            musicName: "갓영현",
-            lyrics: "는 인생이 예술이어야 한다",
-            artist: "김영현",
-            albumTitle: "음잘알 앨범",
-            duration: "2:23",
-            sourceOfPath: "/images/newjeans.gif",
-          },
-          {
-            musicId: 2,
-            musicName: "짱영현",
-            lyrics: "는 인생이 예술이어야 한다2",
-            artist: "김영현2",
-            albumTitle: "음잘알 앨범2",
-            duration: "2:23",
-            sourceOfPath: "/images/baby.jpg",
-          },
-        ],
-      },
-      {
-        pid: 1,
-        numberOfMusic: 3,
-        playlistName: "음악의신김영현찬양하라",
-        musics:
-        [
-          {
-            musicId: 1,
-            musicName: "신영현",
-            lyrics: "는 인생이 예술이어야 한다",
-            artist: "김영현",
-            albumTitle: "음잘알 앨범",
-            duration: "2:23",
-            sourceOfPath: "/images/newjeans.gif",
-          },
-          {
-            musicId: 2,
-            musicName: "영현신",
-            lyrics: "는 인생이 예술이어야 한다2",
-            artist: "김영현2",
-            albumTitle: "음잘알 앨범2",
-            duration: "2:23",
-            sourceOfPath: "/images/baby.jpg",
-          },        
-          {
-            musicId: 3,
-            musicName: "나는신인가",
-            lyrics: "는 인생이 예술이어야 한다2",
-            artist: "김영현2",
-            albumTitle: "음잘알 앨범2",
-            duration: "2:23",
-            sourceOfPath: "/images/baby.jpg",
-          },
-        ]
-      }
-    ],
-  };
+//TODO
+  const playlistArray = useSelector((state) => {
+    return state.playlists.playlistArray;
+  });
+  
 
   return (
 
@@ -128,7 +68,7 @@ const PlaylistSet = ({onSelectedPlaylist}) => {
       </div>
       <div className={styles["playlist-set"]}>
         <ScrollList>
-        {playlistSet.playlists.map((playlist) => (
+        {playlistArray.map((playlist) => (
           <div className={styles["playlist-wrapper"]} key={playlist.pid}>
             <PlaylistItem buttonFlag = {isDeleteClick} playlistData={playlist} onSelectedPlaylist={onSelectedPlaylist}/>
           </div>
