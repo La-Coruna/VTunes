@@ -1,0 +1,26 @@
+import React from 'react';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import Container from './Container';
+
+// Redux 스토어를 설정합니다.
+const mockStore = configureStore();
+const initialState = {
+  // 여기에 필요한 초기 상태를 지정하세요.
+  // 예: user: { id: 1, name: 'John' }
+};
+const store = mockStore(initialState);
+
+// 테스트를 실행합니다.
+it('renders Container component', () => {
+  // 컴포넌트를 Redux Provider로 감싸서 렌더링합니다.
+  const { getByText } = render(
+    <Provider store={store}>
+      <Container />
+    </Provider>
+  );
+
+  // 여기에 특정한 테스트 로직을 추가하세요.
+  // 예: getByText('YourText') 등을 사용하여 특정 텍스트가 렌더링되었는지 확인
+});
